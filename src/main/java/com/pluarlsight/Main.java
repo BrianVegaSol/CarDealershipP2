@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//Test for branchs testing
+//Test for branch testing
 public class Main {
     public static void main(String[] args) {
         DealershipFileManager.getDealership();
