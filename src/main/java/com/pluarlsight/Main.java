@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Test for branchs testing
 public class Main {
     public static void main(String[] args) {
         DealershipFileManager.getDealership();
@@ -12,7 +13,5 @@ public class Main {
         }
         UserInterface.scan.close();
         //close bufferreader
-
-        //hello
     }
 }
