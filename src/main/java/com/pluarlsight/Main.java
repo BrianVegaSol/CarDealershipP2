@@ -13,6 +13,6 @@ public class Main {
         UserInterface.scan.close();
         //close bufferreader
 
-        //hi
+        //hello
     }
 }
