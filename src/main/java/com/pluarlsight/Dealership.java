@@ -198,6 +198,16 @@ public class Dealership {
         }
     }
 
+    //TODO I still need to make sure this works
+    public static Vehicle findVehicleByVIN(int vin) {
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVINNumber() == vin) {
+                return vehicle;
+            }
+        }
+        return null;
+    }
+
     public String toString() {
         return "Dealership Name: " + name +
                 "\nAddress: " + address +

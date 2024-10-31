@@ -27,6 +27,8 @@ public class UserInterface {
                     "7) List All vehicles\n" +
                     "8) Add a vehicle\n" +
                     "9) Remove a vehicle\n" +
+                    "10) Buy a vehicle by VIN\n" +
+                    "11) Lease a vehicle by VIN\n" +
                     "99) Quit");
             byte input = scan.nextByte();
             switch (input) {
@@ -88,10 +90,14 @@ public class UserInterface {
                     int vin = scan.nextInt();
                     Dealership.writerRemove(Integer.toString(vin));
                     break;
-
+                case 10:
+                    processVehiclePurchaseByVIN();
+                    break;
+                case 11:
+                    processVehicleLeaseByVIN();
+                    break;
 
             }
-
         }
     }
 
@@ -138,14 +144,6 @@ public class UserInterface {
         for (Vehicle vehicle : Dealership.inventory) {
             System.out.println(vehicle.toString());
         }
-
-
-    }
-    private void processVehicleLease() {
-        //Gathering details
-        System.out.println("Enter vehicle VIN: ");
-        int vin = scan.nextInt();
-        //not complete, still in the works
     }
     public static void processAddVehicleRequest(Vehicle vehicle) {
         Dealership.inventory.add(vehicle);
@@ -153,6 +151,55 @@ public class UserInterface {
 
     public static void processRemoveVehicleRequest(Vehicle vehicle) {
         Dealership.inventory.remove(vehicle);
+    }
+    //TODO: still need to implement new writer, i made one yesterday just to test.
+    private static void processVehiclePurchaseByVIN() {
+        System.out.println("Enter vehicle VIN for purchase: ");
+        int vin = scan.nextInt();
+        Vehicle vehicle = Dealership.findVehicleByVIN(vin);
+
+        if (vehicle != null) {
+            System.out.println("Vehicle found: " + vehicle);
+
+            scan.nextLine();
+            System.out.println("Enter your first and last name: ");
+            String fullName = scan.nextLine();
+
+            System.out.println("Enter your email address: ");
+            String emailAddress = scan.nextLine();
+
+            System.out.println("Do you want to finance this vehicle? (yes/no): ");
+            String userChoice = scan.nextLine().toLowerCase();
+
+            System.out.println("Do you confirm this purchase for: " + vehicle);
+            String confirmation = scan.nextLine();
+
+            //TODO i think this should come together once file writer is updated.
+            if (confirmation.equalsIgnoreCase("yes")){
+               // ContractFileManager.saveContract(Vehicle, "Sale", userName, userEmail, localDate.now());
+                System.out.println("Congratulations on your purchase!");
+
+            } else {
+                System.out.println("Purchase cancelled.");
+            }
+        } else {
+            System.out.println("No vehicle found with VIN: " +  vin);
+        }
+
+    }
+    //TODO: i need to complete this.
+    private static void processVehicleLeaseByVIN() {
+        System.out.println("Enter vehicle VIN for lease: ");
+        int vin = scan.nextInt();
+        Vehicle vehicle = Dealership.findVehicleByVIN(vin);
+
+        if (vehicle != null) {
+            System.out.println("Vehicle found: " + vehicle);
+           // ContractFileManager.saveContract(vehicle,  );
+        } else {
+            System.out.println("no vehicle found with VIN: " + vin);
+        }
+
     }
 }
 
