@@ -13,8 +13,5 @@ public class Main {
         UserInterface.scan.close();
         //close bufferreader
 
-        //test branch daniela
-
-        //test 2 branch
     }
 }
