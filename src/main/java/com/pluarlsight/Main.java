@@ -14,8 +14,6 @@ public class Main {
             UserInterface.display();
         }
         UserInterface.scan.close();
-        //close bufferreader demo
-        //test
-
+        //close bufferreader
     }
 }
