@@ -139,8 +139,14 @@ public class UserInterface {
             System.out.println(vehicle.toString());
         }
 
-    }
 
+    }
+    private void processVehicleLease() {
+        //Gathering details
+        System.out.println("Enter vehicle VIN: ");
+        int vin = scan.nextInt();
+        //not complete, still in the works
+    }
     public static void processAddVehicleRequest(Vehicle vehicle) {
         Dealership.inventory.add(vehicle);
     }
@@ -149,3 +155,5 @@ public class UserInterface {
         Dealership.inventory.remove(vehicle);
     }
 }
+
+

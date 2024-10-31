@@ -1,6 +1,6 @@
 package com.pluarlsight;
 
-abstract public class Contract {
+public abstract class Contract {
     private String date;
     private String customerName;
     private String customerEmail;
