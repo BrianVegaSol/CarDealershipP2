@@ -7,7 +7,7 @@ abstract public class Contract {
     protected String vehicleSold;
     protected double totalPrice;
     protected double monthlyPayment;
-  //aw
+
     public Contract (String date, String customerName, String customerEmail, String vehicleSold,
                      double totalPrice, double monthlyPayment) {
         this.date = date;
