@@ -2,6 +2,8 @@ package com.pluarlsight;
 
 import java.util.Scanner;
 
+import static com.pluarlsight.Dealership.inventory;
+
 public class SalesContract extends Contract {
 
     public SalesContract(String date, String customerName, String customerEmail, String vehicleSold, double totalPrice,
@@ -11,6 +13,8 @@ public class SalesContract extends Contract {
 
     @Override
     public double getTotalPrice() {
+        //Use this somehow to getPrice?
+        //var vehiclePrice = Dealership.getVehiclesByMakeModel("Ford", "Explorer");
         final double SALES_TAX_AMOUNT = super.totalPrice * .95;
         final int RECORDING_FEE = 100;
 
