@@ -13,9 +13,7 @@ public class SalesContract extends Contract {
 
     @Override
     public double getTotalPrice() {
-        //Use this somehow to getPrice?
-        //var vehiclePrice = Dealership.getVehiclesByMakeModel("Ford", "Explorer");
-        final double SALES_TAX_AMOUNT = super.totalPrice * .95;
+        final double SALES_TAX_AMOUNT = super.totalPrice * 0.05;
         final int RECORDING_FEE = 100;
 
         double processingFee = 0;
@@ -26,13 +24,11 @@ public class SalesContract extends Contract {
             processingFee = 495;
         }
 
-        double fees = SALES_TAX_AMOUNT + RECORDING_FEE + processingFee;
-
-
-
+        double totalPrice = SALES_TAX_AMOUNT + RECORDING_FEE + processingFee + super.totalPrice;
         return totalPrice;
     }
 
+    //TODO move the souts into the UserInterface
     @Override
     public double getMonthlyPayment() {
         boolean wantsFinance = false;
@@ -41,24 +37,29 @@ public class SalesContract extends Contract {
         int financeInput = scan.nextInt();
         if (financeInput == 1) {
             wantsFinance = true;
+        } else {
+            System.out.println("Great! You chose to opt out of the loan! Yay no debt! :D");
+            //Should this return 0?
+            return monthlyPayment;
         }
-        double loanRate;
-        int loanTermInMonths;
         //Loan Term & Month Calc
+        double loanRate = 0;
+        int loanTermInMonths = 0;
         if (wantsFinance) {
         //Loan Calc
         if (super.totalPrice > 10_000) {
-            loanRate = .0425;
+            loanRate = 1.0425;
             loanTermInMonths = 48;
         } else {
-            loanRate = .0525;
+            loanRate = 1.0525;
             loanTermInMonths = 24;
         }
         //TODO might not display properly
-            System.out.printf("Your loan rate is %.2f%%\nYour Loan Term is %d months", loanRate, loanTermInMonths);
-        } else {
-            return 0;
+            System.out.printf("Your loan rate is %.2f%%\nYour Loan Term is %d months%n", loanRate, loanTermInMonths);
         }
-        return 0;
+       monthlyPayment = monthlyPayment * loanTermInMonths * loanRate;
+
+        //double monthlyPayment = (super.totalPrice * loanRate * loanTermInMonths) / 12;
+        return monthlyPayment;
     }
 }
