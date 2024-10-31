@@ -6,6 +6,9 @@ import java.util.Scanner;
 //aaaa
 public class Main {
     public static void main(String[] args) {
+        SalesContract s = new SalesContract("1","Bob","@me","Ford Explorer",
+                1_000,50);
+        System.out.println(s.getMonthlyPayment());
         DealershipFileManager.getDealership();
         if (!UserInterface.exitApp) {
             UserInterface.display();
