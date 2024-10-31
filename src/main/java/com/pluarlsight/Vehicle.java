@@ -83,13 +83,13 @@ public class Vehicle {
         }
 
         public String toString() {
-            return "\nVIN #: " + VINNumber +
+            return String.format("\nVIN #: %,d", VINNumber).replace(",","_") +
                     "\nYear: " + year +
                     "\nMake: " + make +
                     "\nModel: " + model +
                     "\nVehicle Type: " + vehicleType +
                     "\nColor: " + color +
-                    "\nOdometer: " + odometer +
+                    String.format("\nOdometer: %,d", odometer) +
                     String.format("\nPrice: $%,.2f%n", price) +
                     "----------------------------";
         }
