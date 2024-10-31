@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Dealership {
@@ -56,6 +57,7 @@ public class Dealership {
 
     public static ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
         ArrayList<Vehicle> filteredVehicles = new ArrayList<>();
+        inventory.sort(Comparator.comparing(Vehicle::getPrice));
         for (Vehicle vehicle : inventory) {
             if (vehicle.getPrice() >= min && vehicle.getPrice() <= max) {
                 filteredVehicles.add(vehicle);
@@ -77,6 +79,7 @@ public class Dealership {
 
     public static ArrayList<Vehicle> getVehiclesByYear(int oldYear, int newYear) {
         ArrayList<Vehicle> filteredVehicles = new ArrayList<>();
+        inventory.sort(Comparator.comparing(Vehicle::getYear));
         for (Vehicle vehicle : inventory) {
             if (vehicle.getYear() >= oldYear && vehicle.getYear() <= newYear) {
                 filteredVehicles.add(vehicle);
@@ -87,6 +90,7 @@ public class Dealership {
 
     public static ArrayList<Vehicle> getVehiclesByColor(String color) {
         ArrayList<Vehicle> filteredVehicles = new ArrayList<>();
+        inventory.sort(Comparator.comparing(Vehicle::getColor));
         for (Vehicle vehicle : inventory) {
             if (vehicle.getColor().equalsIgnoreCase(color)) {
                 filteredVehicles.add(vehicle);
@@ -97,6 +101,7 @@ public class Dealership {
 
     public static ArrayList<Vehicle> getVehiclesByMileage(double min, double max) {
         ArrayList<Vehicle> filteredVehicles = new ArrayList<>();
+        inventory.sort(Comparator.comparing(Vehicle::getOdometer));
         for (Vehicle vehicle : inventory) {
             if (vehicle.getOdometer() >= min && vehicle.getOdometer() <= max) {
                 filteredVehicles.add(vehicle);
