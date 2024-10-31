@@ -57,7 +57,7 @@ public class SalesContract extends Contract {
         //TODO might not display properly
             System.out.printf("Your loan rate is %.2f%%\nYour Loan Term is %d months%n", loanRate, loanTermInMonths);
         }
-       monthlyPayment = monthlyPayment * loanTermInMonths * loanRate;
+       monthlyPayment = (monthlyPayment * loanRate * loanTermInMonths) / loanTermInMonths;
 
         //double monthlyPayment = (super.totalPrice * loanRate * loanTermInMonths) / 12;
         return monthlyPayment;
