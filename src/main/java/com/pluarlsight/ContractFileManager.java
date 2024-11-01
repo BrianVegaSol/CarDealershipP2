@@ -7,24 +7,17 @@ import java.util.ArrayList;
 
 public class ContractFileManager {
     //TODO should this return a Contract since its abstract? Maybe make void???
-    public static Contract saveContract() {
+    public static void saveContract() {
         //read to .csv
         Dealership dealership = null;
-        String file = "inventory.csv";
+        String file = "contracts.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String dealershipLine = br.readLine();
-            String[] dealershipSplit = dealershipLine.split("\\|");
-            String name = dealershipSplit[0];
-            String address = dealershipSplit[1];
-            String phone = dealershipSplit[2];
-
             //TODO Since Contract is an abstract class, do if contractType instance of Lease/Sales, then proceed
-            dealership = new Dealership(name, address, phone);
-
-            String vehicleLine;
-            while ((vehicleLine = br.readLine()) != null) {
-                String[] vehicleSplit = vehicleLine.split("\\|");
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] vehicleSplit = line.split("\\|");
                 //TODO Change indices
+                String contractType = vehicleSplit[0];
                 int VINNumber = Integer.parseInt(vehicleSplit[0]);
                 int year = Integer.parseInt(vehicleSplit[1]);
                 String make = vehicleSplit[2];
@@ -34,24 +27,41 @@ public class ContractFileManager {
                 int odometer = Integer.parseInt(vehicleSplit[6]);
                 double price = Double.parseDouble(vehicleSplit[7]);
                 Vehicle vehicle = new Vehicle(VINNumber, year, make, model, vehicleType, color, odometer, price);
-                //TODO Add if (contractType = SALE/LEASE) then add to SalesContract/LeaseContract Constructor
-                // Side Project! Use Lower Bound Wildcard here to add Objects to ArrList!
-                // Lower Bound makes it so the parent of Contract (Object!) is used!
-                // Potentially use when there is a linear chain of parent -> child -> child
-                ArrayList <? super Contract> add = new ArrayList<>();
-                //add.add(sale/lease Object);
-                Dealership.inventory.add(vehicle);
+                //TODO Add if (contractType = SALE/LEASE), this is the latest we can wait since there are differnt
+                // variables for the last 4 entries and will cause conversion errors >:(
+                // if (lease/sale)
+                //other
+                //4
+                //splits
+                if (contractType.equalsIgnoreCase("SALES")) {
+                    System.out.println();
+                }
+                if (Contract.contract instanceof SalesContract) {
+                    System.out.println();
+                }
             }
-        } catch (IOException | IndexOutOfBoundsException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-        }
-        //TODO Compiling but probably doesn't work
-        return Contract.contractType;
+            //TODO Add SalesContract/LeaseContract Constructor
+            // Make Sales/LeaseContract Objects and fill constructor with splits
+            // Have an Arraylist here, (potentially 2?) from the Sales/LeaseContract Classes that take the Objects
+            //Ex
+            // SalesContract sales = new SalesContract( fill, this , sucker
+            // up, all, the, way);
+            // SalesContract.inventory.add(vehicle);
 
+        //TODO cant remember what the Exception is but might wanna add anotha one
+    } catch(IOException |
+    IndexOutOfBoundsException e)
+
+    {
+        System.err.println("Error reading file: " + e.getMessage());
     }
-
-    public static void saveContract(Dealership dealership) {
-
-    }
+    //TODO Compiling but probably doesn't work
 }
+
+
+public static void saveContract(Dealership dealership) {
+
+}
+    }
+
 

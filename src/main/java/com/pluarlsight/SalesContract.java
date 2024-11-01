@@ -10,7 +10,7 @@ public class SalesContract extends Contract {
 
     //either add all Vehicle vars to constructor or (probably the )
     //make them = vehicleSold
-    public SalesContract (Contract contractType, String date, String customerName, String customerEmail,
+    public SalesContract (String contractType, String date, String customerName, String customerEmail,
                          Vehicle vehicleSold,
                          double salesTaxAmount, double recordingFee, double processingFee,
                          double totalPrice, String wantsToFinance, double monthlyPayment) {
@@ -62,7 +62,7 @@ public class SalesContract extends Contract {
             System.out.println("Great! You chose to opt out of the loan! Yay no debt! :D");
             wantsToFinance = "NO";
             //Should this return 0?
-            return monthlyPayment;
+            return 0;
         }
         //Loan Term & Month Calc
         double loanRate = 0;

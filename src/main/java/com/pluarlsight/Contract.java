@@ -6,7 +6,8 @@ import java.util.List;
 abstract public class Contract {
     //TODO potential mistake making this static and Type Contract
     //TODO Strongly considering making this String again || Date/Time
-    protected static Contract contractType;
+    protected static Contract contract;
+    protected static String contractType;
     protected String date;
     protected String customerName;
     protected String customerEmail;
@@ -29,9 +30,10 @@ abstract public class Contract {
     }
     //Can also use Generics on classes!
 
-    public Contract (Contract contractType, String date, String customerName, String customerEmail,
+    public Contract (Contract contract, String contractType, String date, String customerName, String customerEmail,
                      Vehicle vehicleSold, double totalPrice, double monthlyPayment) {
         this.contractType = contractType;
+        this.contract = contract;
         this.date = date;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
@@ -40,7 +42,11 @@ abstract public class Contract {
         this.monthlyPayment = monthlyPayment;
     }
 
-    public static Contract getContractType() {
+    public static Contract getContract() {
+        return contract;
+    }
+
+    public static String getContractType() {
         return contractType;
     }
 
