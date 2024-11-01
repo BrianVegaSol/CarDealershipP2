@@ -2,6 +2,8 @@ package com.pluarlsight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -54,20 +56,39 @@ public class ContractFileManager {
                             salesTaxAmount, recordingFee, processingFee, totalPrice, wantsToFinance, monthlyPayment);
                     SalesContract.salesList.add(sales);
                 }
-                /*if (Contract.contract instanceof SalesContract) {
-                    System.out.println();
-                }*/
             }
+
+
             //TODO cant remember what the Exception is but might wanna add anotha one
-        } catch (IOException |
-                 IndexOutOfBoundsException e) {
+        } catch (IOException | IndexOutOfBoundsException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
     }
 
-    public static void saveContract(Dealership dealership) {
 
+    public void writeContract(Contract contract) {
+        try {
+            FileWriter filewriter = new FileWriter("src/contracts.csv", true);
+            BufferedWriter buffWriter = new BufferedWriter(filewriter);
+            Dealership dealership = DealershipFileManager.getDealership();
+            Vehicle vehicle = null;
+            for (Vehicle vehicleLoop : Dealership.inventory) {
+                if (contract.vehicleSold.equalsIgnoreCase(Integer.toString(vehicleLoop.getVINNumber()))) {
+                    vehicle = vehicleLoop;
+                }
+            }
+            if (contract instanceof LeaseContract) {
+                buffWriter.write("LEASE|" + contract.getDate() + "|" + contract.getCustomerName()
+                        + "|" + contract.getCustomerEmail() + "|" + contract.getVehicleSold() + "|" + vehicle.getYear()
+                        + "|" + vehicle.getMake() + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" +
+                        vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice() + "|" + contract
+                );
+            }
+        } catch (IOException e) {
+            System.out.println("Error writing file has occurred");
+        }
     }
-}
 
-
+    public static void saveContract(Dealership dealership) {
+        }
+    }
