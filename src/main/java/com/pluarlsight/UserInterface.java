@@ -88,10 +88,9 @@ public class UserInterface {
                     int vin = scan.nextInt();
                     Dealership.writerRemove(Integer.toString(vin));
                     break;
-
-
+                /*default -> System.out.println("Invalid option. Try again.");
+                break;*/
             }
-
         }
     }
 
