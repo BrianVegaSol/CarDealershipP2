@@ -1,5 +1,8 @@
 package com.pluarlsight;
 
+import java.util.ArrayList;
+import java.util.List;
+
 abstract public class Contract {
     //TODO potential mistake making this static and Type Contract
     //TODO Strongly considering making this String again || Date/Time
@@ -10,6 +13,16 @@ abstract public class Contract {
     protected Vehicle vehicleSold;
     protected double totalPrice;
     protected double monthlyPayment;
+    //TODO SideProject
+    // Make an ArrayList contractList (maybe even method) like so
+    // and see how that works out! :D
+    ArrayList  <? extends Contract> contractList = new ArrayList<>();
+    //or
+    public void setContractList (List<? extends Contract> contractList) {
+        for (Contract contract : contractList) {
+            System.out.println(contract);
+        }
+    }
 
     public Contract (Contract contractType, String date, String customerName, String customerEmail,
                      Vehicle vehicleSold, double totalPrice, double monthlyPayment) {
