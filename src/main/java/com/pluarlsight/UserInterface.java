@@ -135,9 +135,7 @@ public class UserInterface {
 
     public static void processGetAllVehiclesRequest() {
         System.out.println(DealershipFileManager.getDealership().toString());
-        for (Vehicle vehicle : Dealership.inventory) {
-            System.out.println(vehicle.toString());
-        }
+        Dealership.inventory.forEach(vehicle -> System.out.println(vehicle.toString()));
 
 
     }

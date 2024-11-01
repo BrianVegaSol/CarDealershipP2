@@ -201,6 +201,6 @@ public class Dealership {
     public String toString() {
         return "Dealership Name: " + name +
                 "\nAddress: " + address +
-                "\nPhone Number: " + phone;
+                "\nPhone Number: " + phone + "\n";
     }
 }
