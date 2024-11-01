@@ -5,17 +5,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class ContractFileManager {
-    //TODO should this return a Contract since its abstract? Maybe make void???
     public static void saveContract() {
         //read to .csv
         Dealership dealership = null;
         String file = "contracts.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            //TODO Since Contract is an abstract class, do if contractType instance of Lease/Sales, then proceed
             String line;
             while ((line = br.readLine()) != null) {
                 String[] vehicleSplit = line.split("\\|");
-                //TODO Change indices
                 String contractType = vehicleSplit[0];
                 int VINNumber = Integer.parseInt(vehicleSplit[0]);
                 int year = Integer.parseInt(vehicleSplit[1]);
@@ -35,9 +32,9 @@ public class ContractFileManager {
                 if (contractType.equalsIgnoreCase("SALES")) {
                     System.out.println();
                 }
-                if (Contract.contract instanceof SalesContract) {
+                /*if (Contract.contract instanceof SalesContract) {
                     System.out.println();
-                }
+                }*/
             }
             //TODO Add SalesContract/LeaseContract Constructor
             // Make Sales/LeaseContract Objects and fill constructor with splits
