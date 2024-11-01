@@ -88,6 +88,15 @@ public class UserInterface {
                     int vin = scan.nextInt();
                     Dealership.writerRemove(Integer.toString(vin));
                     break;
+                case 10:
+                    //Ask for stuff
+                    //method
+                    break;
+                case 11:
+                    //Ask for stuff
+                    //method
+                    break;
+
 
 
             }
