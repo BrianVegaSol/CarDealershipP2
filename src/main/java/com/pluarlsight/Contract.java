@@ -15,14 +15,19 @@ abstract public class Contract {
     protected double monthlyPayment;
     //TODO SideProject
     // Make an ArrayList contractList (maybe even method) like so
-    // and see how that works out! :D
+    // and see how that works out! :D (These are Upperbound Wildcards) that extend to sub/child classes
+    // Caution: Only safe to use when getting stuff (like printing Object vars from a for each loop)
     ArrayList  <? extends Contract> contractList = new ArrayList<>();
     //or
-    public void setContractList (List<? extends Contract> contractList) {
+    public void setContractList (ArrayList<? extends Contract> contractList) {
         for (Contract contract : contractList) {
             System.out.println(contract);
         }
     }
+    //or
+    public <T extends Contract> void cList (ArrayList <T> cList) {
+    }
+    //Can also use Generics on classes!
 
     public Contract (Contract contractType, String date, String customerName, String customerEmail,
                      Vehicle vehicleSold, double totalPrice, double monthlyPayment) {

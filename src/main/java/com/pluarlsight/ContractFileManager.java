@@ -3,6 +3,7 @@ package com.pluarlsight;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ContractFileManager {
     //TODO should this return a Contract since its abstract? Maybe make void???
@@ -34,6 +35,11 @@ public class ContractFileManager {
                 double price = Double.parseDouble(vehicleSplit[7]);
                 Vehicle vehicle = new Vehicle(VINNumber, year, make, model, vehicleType, color, odometer, price);
                 //TODO Add if (contractType = SALE/LEASE) then add to SalesContract/LeaseContract Constructor
+                // Side Project! Use Lower Bound Wildcard here to add Objects to ArrList!
+                // Lower Bound makes it so the parent of Contract (Object!) is used!
+                // Potentially use when there is a linear chain of parent -> child -> child
+                ArrayList <? super Contract> add = new ArrayList<>();
+                //add.add(sale/lease Object);
                 Dealership.inventory.add(vehicle);
             }
         } catch (IOException | IndexOutOfBoundsException e) {
