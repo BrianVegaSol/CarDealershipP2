@@ -1,22 +1,34 @@
 package com.pluarlsight;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.pluarlsight.Dealership.inventory;
-
 public class SalesContract extends Contract {
+    private double salesTaxAmount;
+    private double recordingFee;
+    private double processingFee;
+    private String wantsToFinance;
+    //either add all Vehicle vars to constructor or (probably the )
+    //make them = vehicleSold
+    public SalesContract(Contract contractType, int invoiceNumber, String customerName, String customerEmail,
+                         Vehicle vehicleSold,
+                         double salesTaxAmount, double recordingFee, double processingFee,
+                         double totalPrice, String wantsToFinance, double monthlyPayment) {
+        super(contractType, invoiceNumber, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
 
-    public SalesContract(String date, String customerName, String customerEmail, String vehicleSold, double totalPrice,
-                         double monthlyPayment) {
-        super(date, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
+
+
+               /* vehicleSold.add(vehicleSold.get(i).getVINNumber(), int year, String make, String model,
+                String vehicleType, String color, int odometer, double price)*/
     }
+
 
     @Override
     public double getTotalPrice() {
-        final double SALES_TAX_AMOUNT = super.totalPrice * 0.05;
-        final int RECORDING_FEE = 100;
+        salesTaxAmount = super.totalPrice * 0.05;
+        recordingFee = 100;
 
-        double processingFee = 0;
+
         //Processing Fee Calc
         if (super.totalPrice > 10_000) {
             processingFee = 295;
@@ -24,7 +36,7 @@ public class SalesContract extends Contract {
             processingFee = 495;
         }
 
-        double totalPrice = SALES_TAX_AMOUNT + RECORDING_FEE + processingFee + super.totalPrice;
+        double totalPrice = salesTaxAmount + recordingFee + processingFee + super.totalPrice;
         return totalPrice;
     }
 
@@ -37,8 +49,10 @@ public class SalesContract extends Contract {
         int financeInput = scan.nextInt();
         if (financeInput == 1) {
             wantsFinance = true;
+            wantsToFinance = "YES";
         } else {
             System.out.println("Great! You chose to opt out of the loan! Yay no debt! :D");
+            wantsToFinance = "NO";
             //Should this return 0?
             return monthlyPayment;
         }
@@ -54,7 +68,6 @@ public class SalesContract extends Contract {
             loanRate = 1.0525;
             loanTermInMonths = 24;
         }
-        //TODO might not display properly
             System.out.printf("Your loan rate is %.2f%%\nYour Loan Term is %d months%n", loanRate, loanTermInMonths);
         }
        monthlyPayment = (monthlyPayment * loanRate * loanTermInMonths) / loanTermInMonths;
@@ -62,4 +75,29 @@ public class SalesContract extends Contract {
         //double monthlyPayment = (super.totalPrice * loanRate * loanTermInMonths) / 12;
         return monthlyPayment;
     }
+
+    //TODO toString() format, looks like its possible :'D Sidenote, probably gonna make Contract -> String instead
+    @Override
+    public String toString () {
+        return contractType + String.format("\nInvoice #: %,d", invoiceNumber).replace(",","_") +
+                //String customerName
+                //String customerEmail
+                "\n\nVehicle Sold Information" +
+                String.format("\nVIN #: %,d", vehicleSold.getVINNumber()).replace(",","_") +
+                "\nYear: " + vehicleSold.getYear() +
+                "\nMake: " + vehicleSold.getMake() +
+                "\nModel: " + vehicleSold.getModel() +
+                "\nVehicle Type: " + vehicleSold.getVehicleType() +
+                "\nColor: " + vehicleSold.getColor() +
+                String.format("\nOdometer: %,d", vehicleSold.getOdometer()) +
+                String.format("\nPrice: $%,.2f%n", vehicleSold.getPrice()) +
+                "Payment Info\n" +
+                //double salesTaxAmount
+                //double recordingFee
+                //double processingFee,
+                //double totalPrice
+                //String wantsToFinance + double monthlyPayment
+                "----------------------------";
+    }
+
 }

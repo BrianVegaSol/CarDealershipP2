@@ -7,19 +7,21 @@ public class LeaseContract extends Contract {
     private int leaseTerm = 36; //all leases financed at 4% for 36 mo.
 
 
-    public LeaseContract(String date, String customerName, String customerEmail, String vehicleSold, double originalPrice, double totalPrice, double monthlyPayment) {
-       // i still need to fix this -dm
+    public LeaseContract(String date, String customerName, String customerEmail, String vehicleSold,
+                          double totalPrice, double monthlyPayment, double originalPrice, double leaseFeePercent,
+                         double interestRate, int leaseTerm) {
         super(date, customerName, customerEmail, vehicleSold, totalPrice,monthlyPayment );
-
         this.originalPrice = originalPrice;
-
+        this.leaseFeePercent = leaseFeePercent;
+        this.interestRate = interestRate;
+        this.leaseTerm = leaseTerm;
     }
 
-    //@Override
+    @Override
     public double getTotalPrice() {
         return originalPrice * (1 + leaseFeePercent);
     }
-   // @Override
+    @Override
     public double getMonthlyPayment() {
         double principal = getTotalPrice() * 0.5; //50% of og price for the lease
         double monthlyRate = interestRate / 12;

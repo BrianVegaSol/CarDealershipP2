@@ -1,15 +1,19 @@
 package com.pluarlsight;
 
 abstract public class Contract {
-    protected String date;
+    //TODO potential mistake making this static and Type Contract
+    protected static Contract contractType;
+    protected int invoiceNumber;
     protected String customerName;
     protected String customerEmail;
-    protected String vehicleSold;
+    protected String date;
+    protected Vehicle vehicleSold;
     protected double totalPrice;
     protected double monthlyPayment;
 
-    public Contract (String date, String customerName, String customerEmail, String vehicleSold,
-                     double totalPrice, double monthlyPayment) {
+    public Contract (Contract contractType, int invoiceNumber, String customerName, String customerEmail,
+                     Vehicle vehicleSold, double totalPrice, double monthlyPayment) {
+        this.contractType = contractType;
         this.date = date;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
@@ -30,14 +34,14 @@ abstract public class Contract {
         return customerEmail;
     }
 
-    public String getVehicleSold() {
+    public Vehicle getVehicleSold() {
         return vehicleSold;
     }
     abstract public double getTotalPrice();
     abstract public double getMonthlyPayment();
 
 
-    public void setVehicleSold(String vehicleSold) {
+    public void setVehicleSold(Vehicle vehicleSold) {
         this.vehicleSold = vehicleSold;
     }
 
