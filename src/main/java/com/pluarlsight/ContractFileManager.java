@@ -3,6 +3,7 @@ package com.pluarlsight;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ContractFileManager {
     public static void saveContract() {
@@ -12,52 +13,62 @@ public class ContractFileManager {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] vehicleSplit = line.split("\\|");
-                String contractType = vehicleSplit[0];
-                int VINNumber = Integer.parseInt(vehicleSplit[0]);
-                int year = Integer.parseInt(vehicleSplit[1]);
-                String make = vehicleSplit[2];
-                String model = vehicleSplit[3];
-                String vehicleType = vehicleSplit[4];
-                String color = vehicleSplit[5];
-                int odometer = Integer.parseInt(vehicleSplit[6]);
-                double price = Double.parseDouble(vehicleSplit[7]);
+                String[] split = line.split("\\|");
+                String contractType = split[0];
+                //TODO May change to LocalDate/Time later
+                String date = split[1];
+                String customerName = split[2];
+                String customerEmail = split[3];
+                //TODO IntelliJ Suggests using a method for Vehicle Split 0.0
+                int VINNumber = Integer.parseInt(split[4]);
+                int year = Integer.parseInt(split[5]);
+                String make = split[6];
+                String model = split[7];
+                String vehicleType = split[8];
+                String color = split[9];
+                int odometer = Integer.parseInt(split[10]);
+                double price = Double.parseDouble(split[11]);
                 Vehicle vehicle = new Vehicle(VINNumber, year, make, model, vehicleType, color, odometer, price);
-                //TODO Add if (contractType = SALE/LEASE), this is the latest we can wait since there are differnt
-                // variables for the last 4 entries and will cause conversion errors >:(
-                // if (lease/sale)
-                //other
-                //4
-                //splits
+                if (contractType.equalsIgnoreCase("LEASE")) {
+                    //TODO Not sure what vars need to be here @Daniela but need to update LeaseContract Constructor
+                    // to match what is in .csv
+                    // LEASE|20210928|Zachary Westly|zach@texas.com|37846|2021| Chevrolet|Silverado|truck|Black|2750|31995.00|
+                    // what are these 4 vars???
+                    // 15997.50|2239.65|18337.15|541.39
+                    double totalPrice = Double.parseDouble(split[12]);
+                    double monthlyPayment = Double.parseDouble(split[13]);
+                    double originalPrice = Double.parseDouble(split[14]);
+                    double var4 = Double.parseDouble(split[15]);
+                    /*LeaseContract lease = new SalesContract(contractType, date, customerName, customerEmail, vehicle,
+                            totalPrice, monthlyPayment, originalPrice, var4);*/
+                    //LeaseContract.leaseList.add(lease);
+
+                }
                 if (contractType.equalsIgnoreCase("SALES")) {
-                    System.out.println();
+                    double salesTaxAmount = Double.parseDouble(split[12]);
+                    double recordingFee = Double.parseDouble(split[13]);
+                    double processingFee = Double.parseDouble(split[14]);
+                    double totalPrice = Double.parseDouble(split[15]);
+                    String wantsToFinance = split[16];
+                    double monthlyPayment = Double.parseDouble(split[17]);
+                    SalesContract sales = new SalesContract(contractType, date, customerName, customerEmail, vehicle,
+                            salesTaxAmount, recordingFee, processingFee, totalPrice, wantsToFinance, monthlyPayment);
+                    SalesContract.salesList.add(sales);
                 }
                 /*if (Contract.contract instanceof SalesContract) {
                     System.out.println();
                 }*/
             }
-            //TODO Add SalesContract/LeaseContract Constructor
-            // Make Sales/LeaseContract Objects and fill constructor with splits
-            // Have an Arraylist here, (potentially 2?) from the Sales/LeaseContract Classes that take the Objects
-            //Ex
-            // SalesContract sales = new SalesContract( fill, this , sucker
-            // up, all, the, way);
-            // SalesContract.inventory.add(vehicle);
-
-        //TODO cant remember what the Exception is but might wanna add anotha one
-    } catch(IOException |
-    IndexOutOfBoundsException e)
-
-    {
-        System.err.println("Error reading file: " + e.getMessage());
+            //TODO cant remember what the Exception is but might wanna add anotha one
+        } catch (IOException |
+                 IndexOutOfBoundsException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
     }
-    //TODO Compiling but probably doesn't work
-}
 
+    public static void saveContract(Dealership dealership) {
 
-public static void saveContract(Dealership dealership) {
-
-}
     }
+}
 
 

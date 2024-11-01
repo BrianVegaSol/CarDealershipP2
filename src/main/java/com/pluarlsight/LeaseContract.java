@@ -1,11 +1,17 @@
 package com.pluarlsight;
 
+import java.rmi.dgc.Lease;
+import java.util.ArrayList;
+
 public class LeaseContract extends Contract {
     private double originalPrice;
     private double leaseFeePercent = 0.07;
     private double interestRate = 0.04;
     private int leaseTerm = 36; //all leases financed at 4% for 36 mo.
+    static ArrayList<LeaseContract> leaseList = new ArrayList<>();
 
+
+    //TODO contractType will likely need to be made String/Date/Time type instead of Contract
     public LeaseContract (String contractType, String date, String customerName, String customerEmail,
                          Vehicle vehicleSold,
                          double totalPrice, double monthlyPayment, double originalPrice, double leaseFeePercent,

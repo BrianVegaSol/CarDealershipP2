@@ -1,5 +1,6 @@
 package com.pluarlsight;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SalesContract extends Contract {
@@ -7,6 +8,7 @@ public class SalesContract extends Contract {
     private double recordingFee;
     private double processingFee;
     private String wantsToFinance;
+    static ArrayList<SalesContract> salesList = new ArrayList<>();
 
     //either add all Vehicle vars to constructor or (probably the )
     //make them = vehicleSold
