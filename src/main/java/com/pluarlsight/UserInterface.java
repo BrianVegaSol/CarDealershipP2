@@ -163,10 +163,10 @@ public class UserInterface {
 
             scan.nextLine();
             System.out.println("Enter your first and last name: ");
-            String fullName = scan.nextLine();
+            String customerName = scan.nextLine();
 
             System.out.println("Enter your email address: ");
-            String emailAddress = scan.nextLine();
+            String customerEmail = scan.nextLine();
 
             System.out.println("Do you want to finance this vehicle? (yes/no): ");
             String userChoice = scan.nextLine().toLowerCase();
@@ -176,7 +176,7 @@ public class UserInterface {
 
             //TODO i think this should come together once file writer is updated.
             if (confirmation.equalsIgnoreCase("yes")){
-               // ContractFileManager.saveContract(Vehicle, "Sale", userName, userEmail, localDate.now());
+               ContractFileManager.saveContract();
                 System.out.println("Congratulations on your purchase!");
 
             } else {

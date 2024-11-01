@@ -1,21 +1,35 @@
 package com.pluarlsight;
 
 abstract public class Contract {
+    //TODO potential mistake making this static and Type Contract
+    //TODO Strongly considering making this String again || Date/Time
+    protected static Contract contract;
+    protected static String contractType;
     protected String date;
     protected String customerName;
     protected String customerEmail;
-    protected String vehicleSold;
+    protected Vehicle vehicleSold;
     protected double totalPrice;
     protected double monthlyPayment;
 
-    public Contract (String date, String customerName, String customerEmail, String vehicleSold,
-                     double totalPrice, double monthlyPayment) {
+    public Contract (String contractType, String date, String customerName, String customerEmail,
+                     Vehicle vehicleSold, double totalPrice, double monthlyPayment) {
+        this.contractType = contractType;
+        this.contract = contract;
         this.date = date;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.vehicleSold = vehicleSold;
         this.totalPrice = totalPrice;
         this.monthlyPayment = monthlyPayment;
+    }
+
+    public static Contract getContract() {
+        return contract;
+    }
+
+    public static String getContractType() {
+        return contractType;
     }
 
     public String getDate() {
@@ -30,14 +44,14 @@ abstract public class Contract {
         return customerEmail;
     }
 
-    public String getVehicleSold() {
+    public Vehicle getVehicleSold() {
         return vehicleSold;
     }
     abstract public double getTotalPrice();
     abstract public double getMonthlyPayment();
 
 
-    public void setVehicleSold(String vehicleSold) {
+    public void setVehicleSold(Vehicle vehicleSold) {
         this.vehicleSold = vehicleSold;
     }
 
@@ -51,5 +65,11 @@ abstract public class Contract {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Contract Type: %s\nDate: %s\nCustomer Name: %s\nCustomer Email: %s\nVehicle: %s\nTotal Price: $%.2f\nMonthly Payment: $%.2f",
+                contractType, date, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
     }
 }
