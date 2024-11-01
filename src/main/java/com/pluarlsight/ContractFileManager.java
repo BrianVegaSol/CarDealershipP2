@@ -9,20 +9,12 @@ public class ContractFileManager {
     public static Contract saveContract() {
         //read to .csv
         Dealership dealership = null;
-        String file = "inventory.csv";
+        String file = "contracts.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String dealershipLine = br.readLine();
-            String[] dealershipSplit = dealershipLine.split("\\|");
-            String name = dealershipSplit[0];
-            String address = dealershipSplit[1];
-            String phone = dealershipSplit[2];
-
             //TODO Since Contract is an abstract class, do if contractType instance of Lease/Sales, then proceed
-            dealership = new Dealership(name, address, phone);
-
-            String vehicleLine;
-            while ((vehicleLine = br.readLine()) != null) {
-                String[] vehicleSplit = vehicleLine.split("\\|");
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] vehicleSplit = line.split("\\|");
                 //TODO Change indices
                 int VINNumber = Integer.parseInt(vehicleSplit[0]);
                 int year = Integer.parseInt(vehicleSplit[1]);
@@ -33,9 +25,22 @@ public class ContractFileManager {
                 int odometer = Integer.parseInt(vehicleSplit[6]);
                 double price = Double.parseDouble(vehicleSplit[7]);
                 Vehicle vehicle = new Vehicle(VINNumber, year, make, model, vehicleType, color, odometer, price);
-                //TODO Add if (contractType = SALE/LEASE) then add to SalesContract/LeaseContract Constructor
-                Dealership.inventory.add(vehicle);
+                //TODO Add if (contractType = SALE/LEASE), this is the latest we can wait since there are differnt
+                // variables for the last 4 entries and will cause conversion errors >:(
+                // if (lease/sale)
+                //other
+                //4
+                //splits
+                //
+                //TODO Add SalesContract/LeaseContract Constructor
+                // Make Sales/LeaseContract Objects and fill constructor with splits
+                // Have an Arraylist here, (potentially 2?) from the Sales/LeaseContract Classes that take the Objects
+                //Ex
+                // SalesContract sales = new SalesContract( fill, this , sucker
+                // up, all, the, way);
+                // SalesContract.inventory.add(vehicle);
             }
+            //TODO cant remember what the Exception is but might wanna add anotha one
         } catch (IOException | IndexOutOfBoundsException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
