@@ -6,7 +6,7 @@ import java.util.Scanner;
 //aaaa test
 public class Main {
     public static void main(String[] args) {
-        DealershipFileManager.getDealership();
+
         if (!UserInterface.exitApp) {
             UserInterface.display();
         }
