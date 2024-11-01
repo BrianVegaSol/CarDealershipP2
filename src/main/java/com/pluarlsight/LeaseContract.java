@@ -7,11 +7,11 @@ public class LeaseContract extends Contract {
     private int leaseTerm = 36; //all leases financed at 4% for 36 mo.
 
     //TODO contractType will likely need to be made String/Date/Time type instead of Contract
-    public LeaseContract (Contract contractType, String date, String customerName, String customerEmail,
+    public LeaseContract (String contractType, String date, String customerName, String customerEmail,
                          Vehicle vehicleSold,
                          double totalPrice, double monthlyPayment, double originalPrice, double leaseFeePercent,
                          double interestRate, int leaseTerm) {
-        super("contractType", date, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
+        super("LEASE", date, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
         this.originalPrice = originalPrice;
         this.leaseFeePercent = leaseFeePercent;
         this.interestRate = interestRate;

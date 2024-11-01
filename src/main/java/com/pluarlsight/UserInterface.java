@@ -1,5 +1,7 @@
 package com.pluarlsight;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -171,12 +173,17 @@ public class UserInterface {
             System.out.println("Do you want to finance this vehicle? (yes/no): ");
             String userChoice = scan.nextLine().toLowerCase();
 
-            System.out.println("Do you confirm this purchase for: " + vehicle);
+            System.out.println("Do you confirm this purchase? (yes/no): ");
             String confirmation = scan.nextLine();
 
             //TODO i think this should come together once file writer is updated.
             if (confirmation.equalsIgnoreCase("yes")){
-               ContractFileManager.saveContract();
+                String contractType = "SALE";
+                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+                double totalPrice = vehicle.getPrice();
+                //double monthlyPayment = totalPrice/36;
+
+                SalesContract salesContract = new SalesContract(contractType, date, customerName, customerEmail, vehicle, vehicle.getVINNumber(), vehicle.getOdometer();
                 System.out.println("Congratulations on your purchase!");
 
             } else {
@@ -195,7 +202,25 @@ public class UserInterface {
 
         if (vehicle != null) {
             System.out.println("Vehicle found: " + vehicle);
-           // ContractFileManager.saveContract(vehicle,  );
+
+            scan.nextLine();
+            System.out.println("Enter your first and last name: ");
+            String customerName = scan.nextLine();
+
+            System.out.println("Enter your email address: ");
+            String customerEmail = scan.nextLine();
+
+            System.out.println("Do you confirm this lease? (yes/no): ");
+            String confirmation = scan.nextLine().toLowerCase();
+
+            //TODO i tried to do something with  the writer, but it is not functional.
+            if (confirmation.equalsIgnoreCase("yes")){
+                ContractFileManager.saveContract();
+                System.out.println("Congratulations on your purchase!");
+
+            } else {
+                System.out.println("Lease cancelled.");
+            }
         } else {
             System.out.println("no vehicle found with VIN: " + vin);
         }

@@ -60,7 +60,7 @@ public static void saveContract(Contract contract, String fileName) {
          fileName = "contracts.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
-            writer.write(formattedContract(contract));
+            writer.write(saveContract(contract));
             writer.newLine();
 
         } catch (IOException e) {
@@ -68,7 +68,7 @@ public static void saveContract(Contract contract, String fileName) {
         }
 
 }
-private static String formattedContract(Contract contract) {
+private static String saveContract(Contract contract) {
         return String.format("%s|%s|%s|%s|%s|%.2f|%.2f",
                 contract.getContractType(),
                 contract.getDate(),
