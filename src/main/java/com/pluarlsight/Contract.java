@@ -2,16 +2,16 @@ package com.pluarlsight;
 
 abstract public class Contract {
     //TODO potential mistake making this static and Type Contract
+    //TODO Strongly considering making this String again || Date/Time
     protected static Contract contractType;
-    protected int invoiceNumber;
+    protected String date;
     protected String customerName;
     protected String customerEmail;
-    protected String date;
     protected Vehicle vehicleSold;
     protected double totalPrice;
     protected double monthlyPayment;
 
-    public Contract (Contract contractType, int invoiceNumber, String customerName, String customerEmail,
+    public Contract (Contract contractType, String date, String customerName, String customerEmail,
                      Vehicle vehicleSold, double totalPrice, double monthlyPayment) {
         this.contractType = contractType;
         this.date = date;
@@ -20,6 +20,10 @@ abstract public class Contract {
         this.vehicleSold = vehicleSold;
         this.totalPrice = totalPrice;
         this.monthlyPayment = monthlyPayment;
+    }
+
+    public static Contract getContractType() {
+        return contractType;
     }
 
     public String getDate() {

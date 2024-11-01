@@ -1,6 +1,5 @@
 package com.pluarlsight;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SalesContract extends Contract {
@@ -8,26 +7,34 @@ public class SalesContract extends Contract {
     private double recordingFee;
     private double processingFee;
     private String wantsToFinance;
+
     //either add all Vehicle vars to constructor or (probably the )
     //make them = vehicleSold
-    public SalesContract(Contract contractType, int invoiceNumber, String customerName, String customerEmail,
+    public SalesContract (Contract contractType, String date, String customerName, String customerEmail,
                          Vehicle vehicleSold,
                          double salesTaxAmount, double recordingFee, double processingFee,
                          double totalPrice, String wantsToFinance, double monthlyPayment) {
-        super(contractType, invoiceNumber, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
-
-
-
-               /* vehicleSold.add(vehicleSold.get(i).getVINNumber(), int year, String make, String model,
-                String vehicleType, String color, int odometer, double price)*/
+        super(contractType, date, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
+        this.salesTaxAmount = salesTaxAmount;
+        this.recordingFee = recordingFee;
+        this.processingFee = processingFee;
+        this.wantsToFinance = wantsToFinance;
+        /* vehicleSold.add(vehicleSold.get(i).getVINNumber(), int year, String make, String model,
+        String vehicleType, String color, int odometer, double price)*/
     }
 
+    public String getWantsToFinance() {
+        return wantsToFinance;
+    }
+
+    public void setWantsToFinance(String wantsToFinance) {
+        this.wantsToFinance = wantsToFinance;
+    }
 
     @Override
     public double getTotalPrice() {
         salesTaxAmount = super.totalPrice * 0.05;
         recordingFee = 100;
-
 
         //Processing Fee Calc
         if (super.totalPrice > 10_000) {
@@ -41,6 +48,7 @@ public class SalesContract extends Contract {
     }
 
     //TODO move the souts into the UserInterface
+    //TODO might be using monthlyPayment car from Contract wrong
     @Override
     public double getMonthlyPayment() {
         boolean wantsFinance = false;
@@ -60,44 +68,44 @@ public class SalesContract extends Contract {
         double loanRate = 0;
         int loanTermInMonths = 0;
         if (wantsFinance) {
-        //Loan Calc
-        if (super.totalPrice > 10_000) {
-            loanRate = 1.0425;
-            loanTermInMonths = 48;
-        } else {
-            loanRate = 1.0525;
-            loanTermInMonths = 24;
-        }
+            //Loan Calc
+            if (super.totalPrice > 10_000) {
+                loanRate = 1.0425;
+                loanTermInMonths = 48;
+            } else {
+                loanRate = 1.0525;
+                loanTermInMonths = 24;
+            }
             System.out.printf("Your loan rate is %.2f%%\nYour Loan Term is %d months%n", loanRate, loanTermInMonths);
         }
-       monthlyPayment = (monthlyPayment * loanRate * loanTermInMonths) / loanTermInMonths;
+        monthlyPayment = (monthlyPayment * loanRate * loanTermInMonths) / loanTermInMonths;
 
         //double monthlyPayment = (super.totalPrice * loanRate * loanTermInMonths) / 12;
         return monthlyPayment;
     }
 
-    //TODO toString() format, looks like its possible :'D Sidenote, probably gonna make Contract -> String instead
+    //TODO toString() format, looks like its possible :'D Sidenote, probably gonna make Contract -> String/Date instead
     @Override
-    public String toString () {
-        return contractType + String.format("\nInvoice #: %,d", invoiceNumber).replace(",","_") +
+    public String toString() {
+        return //contractType + String.format("\nDate Purchased: %,s", date).replace(",","_") +
                 //String customerName
                 //String customerEmail
                 "\n\nVehicle Sold Information" +
-                String.format("\nVIN #: %,d", vehicleSold.getVINNumber()).replace(",","_") +
-                "\nYear: " + vehicleSold.getYear() +
-                "\nMake: " + vehicleSold.getMake() +
-                "\nModel: " + vehicleSold.getModel() +
-                "\nVehicle Type: " + vehicleSold.getVehicleType() +
-                "\nColor: " + vehicleSold.getColor() +
-                String.format("\nOdometer: %,d", vehicleSold.getOdometer()) +
-                String.format("\nPrice: $%,.2f%n", vehicleSold.getPrice()) +
-                "Payment Info\n" +
-                //double salesTaxAmount
-                //double recordingFee
-                //double processingFee,
-                //double totalPrice
-                //String wantsToFinance + double monthlyPayment
-                "----------------------------";
+                        String.format("\nVIN #: %,d", vehicleSold.getVINNumber()).replace(",", "_") +
+                        "\nYear: " + vehicleSold.getYear() +
+                        "\nMake: " + vehicleSold.getMake() +
+                        "\nModel: " + vehicleSold.getModel() +
+                        "\nVehicle Type: " + vehicleSold.getVehicleType() +
+                        "\nColor: " + vehicleSold.getColor() +
+                        String.format("\nOdometer: %,d", vehicleSold.getOdometer()) +
+                        String.format("\nPrice: $%,.2f%n", vehicleSold.getPrice()) +
+                        "Payment Info\n" +
+                        //double salesTaxAmount
+                        //double recordingFee
+                        //double processingFee,
+                        //double totalPrice
+                        //String wantsToFinance + double monthlyPayment
+                        "----------------------------";
     }
 
 }
