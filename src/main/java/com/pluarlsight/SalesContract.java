@@ -10,11 +10,11 @@ public class SalesContract extends Contract {
 
     //either add all Vehicle vars to constructor or (probably the )
     //make them = vehicleSold
-    public SalesContract (String contractType, String date, String customerName, String customerEmail,
+    public SalesContract (Contract contract, String contractType, String date, String customerName, String customerEmail,
                          Vehicle vehicleSold,
                          double salesTaxAmount, double recordingFee, double processingFee,
                          double totalPrice, String wantsToFinance, double monthlyPayment) {
-        super(contractType, date, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
+        super(contract, contractType, date, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
         this.salesTaxAmount = salesTaxAmount;
         this.recordingFee = recordingFee;
         this.processingFee = processingFee;
