@@ -23,7 +23,8 @@ public class ContractFileManager {
                 buffWriter.write("LEASE|" + contract.getDate() + "|" + contract.getCustomerName()
                         + "|" + contract.getCustomerEmail() + "|" + contract.getVehicleSold() + "|" + vehicle.getYear()
                         + "|" + vehicle.getMake() + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" +
-                        vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice() + "|" + contract
+                        vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice() + "|" + ((LeaseContract) contract).getEndPrice()
+                        + "|" + ((LeaseContract) contract).ge
 
 
                 );

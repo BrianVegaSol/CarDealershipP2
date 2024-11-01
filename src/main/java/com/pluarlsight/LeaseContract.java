@@ -14,7 +14,12 @@ public class LeaseContract extends Contract {
         this.originalPrice = originalPrice;
 
     }
-
+    public double getEndPrice(){
+        return originalPrice/2;
+    }
+    public double getLeaseFee(){
+        return originalPrice * leaseFeePercent;
+    }
     //@Override
     public double getTotalPrice() {
         return originalPrice * (1 + leaseFeePercent);
