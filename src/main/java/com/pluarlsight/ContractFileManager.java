@@ -42,7 +42,6 @@ public class ContractFileManager {
                     /*LeaseContract lease = new SalesContract(contractType, date, customerName, customerEmail, vehicle,
                             totalPrice, monthlyPayment, originalPrice, var4);*/
                     //LeaseContract.leaseList.add(lease);
-
                 }
                 if (contractType.equalsIgnoreCase("SALES")) {
                     double salesTaxAmount = Double.parseDouble(split[12]);
