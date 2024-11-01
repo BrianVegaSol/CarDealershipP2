@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract public class Contract {
-    //protected static Contract contract;
+    protected static Contract contract;
     protected static String contractType;
     protected String date;
     protected String customerName;

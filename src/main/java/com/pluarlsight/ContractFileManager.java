@@ -57,8 +57,6 @@ public class ContractFileManager {
                     SalesContract.salesList.add(sales);
                 }
             }
-
-
             //TODO cant remember what the Exception is but might wanna add anotha one
         } catch (IOException | IndexOutOfBoundsException e) {
             System.err.println("Error reading file: " + e.getMessage());
@@ -73,6 +71,11 @@ public class ContractFileManager {
             Dealership dealership = DealershipFileManager.getDealership();
             Vehicle vehicle = null;
             for (Vehicle vehicleLoop : Dealership.inventory) {
+                //TODO Either not working from start or code broke when merging :'(
+                // Left some suggested code
+                //if (contract.vehicleSold == vehicleLoop) or
+                // if (contract.vehicleSold == vehicleLoop){
+                //if (contract.vehicleSold.getVINNumber() == vehicleLoop.getVINNumber()){
                 if (contract.vehicleSold.equalsIgnoreCase(Integer.toString(vehicleLoop.getVINNumber()))) {
                     vehicle = vehicleLoop;
                 }
@@ -90,5 +93,5 @@ public class ContractFileManager {
     }
 
     public static void saveContract(Dealership dealership) {
-        }
     }
+}
