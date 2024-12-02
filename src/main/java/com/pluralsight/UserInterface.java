@@ -69,7 +69,7 @@ public class UserInterface {
                     int oldYear = scan.nextInt();
                     System.out.println("What is the newest year of the car?");
                     int newYear = scan.nextInt();
-                    processGetVehiclesByYearRequest(oldYear, newYear);
+                    VehicleDAO.viewVehicleByYear(connect, oldYear, newYear);
                     break;
                 case 4:
                     scan.nextLine();
