@@ -1,9 +1,8 @@
-package com.pluarlsight;
+package com.pluralsight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ContractFileManager {
     public static void saveContract() {

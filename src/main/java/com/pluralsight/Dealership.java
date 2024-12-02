@@ -1,5 +1,6 @@
-package com.pluarlsight;
+package com.pluralsight;
 
+import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,6 +14,7 @@ public class Dealership {
     private String address;
     private String phone;
     static ArrayList<Vehicle> inventory;
+    static Scanner scan = new Scanner(System.in);
 
     public Dealership(String name, String address, String phone) {
         this.name = name;
@@ -134,21 +136,6 @@ public class Dealership {
         for (int i = 0; i < inventory.size(); i++) {
             System.out.println(inventory.get(i).toString());
         }
-    }
-
-    public static void addVehicle() {
-        //Vehicle vehicle;
-        System.out.println("Please enter you vehicle in the following format\n" +
-                "VIN|Year|Make|Model|Car Type|Color|Mileage|Price");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-
-        try (FileWriter writer = new FileWriter("inventory.csv", true)) {
-            writer.write(input.trim() + "\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        //inventory.add(vehicle);
     }
 
     public static void writerRemove(String input) {

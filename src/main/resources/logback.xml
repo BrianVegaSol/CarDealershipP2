@@ -1,0 +1,32 @@
+<!--
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>-->
+<configuration>
+    <appender name="logs.txt" class="ch.qos.logback.core.FileAppender">
+        <file>app.log</file>
+        <encoder>
+            <pattern>%date %level %logger{40} [%thread] %message%n%xException%n%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="logs.txt" />
+    </root>
+</configuration>
+
+<configuration>
+<logger name="com.zaxxer.hikari" level="OFF" />
+<!-- Other logger configurations -->
+</configuration>

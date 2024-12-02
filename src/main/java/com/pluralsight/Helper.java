@@ -1,4 +1,4 @@
-package com.pluarlsight;
+package com.pluralsight;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

@@ -1,5 +1,11 @@
-package com.pluarlsight;
+package com.pluralsight;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -7,6 +13,8 @@ public class UserInterface {
     static boolean exitApp = false;
     static Scanner scan = new Scanner(System.in);
     private static Dealership dealership;
+    private static DataSource dataSource;
+    private static final Logger logger = LoggerFactory.getLogger(UserInterface.class);
 
     private static Dealership init() {
         DealershipFileManager dealer;
@@ -14,8 +22,13 @@ public class UserInterface {
         return dealership;
     }
 
-    public static void display() {
+    public static void display() throws SQLException {
         init();
+        System.setProperty("com.zaxxer.hikari.HikariConfig.logLevel", "INFO");
+        //Connect to db
+        DataManager data = new DataManager();
+        dataSource = data.getDatabaseConnection();
+        Connection connect = dataSource.getConnection();
         while (displayMenu) {
             System.out.println("Welcome to the Display Menu!\n" +
                     "1) Find vehicles within a price range\n" +
@@ -28,6 +41,7 @@ public class UserInterface {
                     "8) Add a vehicle\n" +
                     "9) Remove a vehicle\n" +
                     "99) Quit");
+
             byte input = scan.nextByte();
             switch (input) {
                 case 99:
@@ -40,7 +54,7 @@ public class UserInterface {
                     double min = scan.nextDouble();
                     System.out.println("What is the maximum price?");
                     double max = scan.nextDouble();
-                    processVehiclesByPriceRequest(min, max);
+                    VehicleDAO.viewVehicleByPrice(connect, min, max);
                     break;
                 case 2:
                     scan.nextLine();
@@ -48,7 +62,7 @@ public class UserInterface {
                     String make = scan.nextLine();
                     System.out.println("What is the model of the car?");
                     String model = scan.nextLine();
-                    processVehiclesByMakeModelRequest(make, model);
+                    VehicleDAO.viewVehicleByMakeModel(connect, make, model);
                     break;
                 case 3:
                     System.out.println("What is the oldest year of the car?");
@@ -77,11 +91,11 @@ public class UserInterface {
                     processGetVehiclesByTypeRequest(type);
                     break;
                 case 7:
-                    processGetAllVehiclesRequest();
+                    DataManager.viewVehicleRecords(connect);
                     break;
                 case 8:
-                    Dealership.addVehicle();
-                    System.out.println("Vehicle Added Successfully");
+                    DataManager.addVehicle(connect,scan);
+                    //System.out.println("Vehicle Added Successfully");
                     break;
                 case 9:
                     System.out.println("What is the VIN of the vehicle do you want to remove");

@@ -1,7 +1,4 @@
-package com.pluarlsight;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.pluralsight;
 
 abstract public class Contract {
     //TODO potential mistake making this static and Type Contract
@@ -14,21 +11,6 @@ abstract public class Contract {
     protected Vehicle vehicleSold;
     protected double totalPrice;
     protected double monthlyPayment;
-    //TODO SideProject
-    // Make an ArrayList contractList (maybe even method) like so
-    // and see how that works out! :D (These are Upperbound Wildcards) that extend to sub/child classes
-    // Caution: Only safe to use when getting stuff (like printing Object vars from a for each loop)
-    ArrayList  <? extends Contract> contractList = new ArrayList<>();
-    //or
-    public void setContractList (ArrayList<? extends Contract> contractList) {
-        for (Contract contract : contractList) {
-            System.out.println(contract);
-        }
-    }
-    //or
-    public <T extends Contract> void cList (ArrayList <T> cList) {
-    }
-    //Can also use Generics on classes!
 
     public Contract (String contractType, String date, String customerName, String customerEmail,
                      Vehicle vehicleSold, double totalPrice, double monthlyPayment) {
@@ -41,10 +23,6 @@ abstract public class Contract {
         this.totalPrice = totalPrice;
         this.monthlyPayment = monthlyPayment;
     }
-
-    /*public static Contract getContract() {
-        return contract;
-    }*/
 
     public static String getContractType() {
         return contractType;

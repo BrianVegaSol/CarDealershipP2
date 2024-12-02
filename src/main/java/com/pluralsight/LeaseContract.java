@@ -1,6 +1,5 @@
-package com.pluarlsight;
+package com.pluralsight;
 
-import java.rmi.dgc.Lease;
 import java.util.ArrayList;
 
 public class LeaseContract extends Contract {
