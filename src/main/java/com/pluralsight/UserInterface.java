@@ -75,14 +75,14 @@ public class UserInterface {
                     scan.nextLine();
                     System.out.println("What is the color of the car?");
                     String color = scan.nextLine();
-                    processGetVehiclesByColorRequest(color);
+                    VehicleDAO.viewVehicleByColor(connect, color);
                     break;
                 case 5:
                     System.out.println("What is the minimum mileage?");
                     int minMiles = scan.nextInt();
                     System.out.println("What is the maximum mileage?");
                     int maxMiles = scan.nextInt();
-                    processGetVehiclesByMileageRequest(minMiles, maxMiles);
+                    VehicleDAO.viewVehicleByMileage(connect, minMiles, maxMiles);
                     break;
                 case 6:
                     scan.nextLine();

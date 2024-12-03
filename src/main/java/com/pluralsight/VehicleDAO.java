@@ -81,6 +81,55 @@ public class VehicleDAO {
             }
         }
     }
+
+    static void viewVehicleByColor(Connection connection, String color) throws SQLException {
+        String sql = "SELECT * FROM [BVS_Table2:Vehicles] WHERE Color = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, color);
+            try (ResultSet rs = stmt.executeQuery()) {
+                System.out.println("\nVehicle Records:");
+                while (rs.next()) {
+                    System.out.println("VIN: " + rs.getInt("VINNumber") +
+                            "\nYear: " + rs.getInt("Year") +
+                            "\nMake: " + rs.getString("Make") +
+                            "\nModel: " + rs.getString("Model") +
+                            "\nVehicle Type: " + rs.getString("VehicleType") +
+                            "\nColor: " + rs.getString("Color") +
+                            "\nMileage: " + rs.getInt("Odometer") +
+                            "\nPrice: $" + rs.getDouble("Price") +
+                            "\nisSold: " + rs.getByte("Sold") + "\n\n"
+                    );
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    static void viewVehicleByMileage(Connection connection, int minMiles, int maxMiles) throws SQLException {
+        String sql = "SELECT * FROM [BVS_Table2:Vehicles] WHERE Odometer BETWEEN  ? AND ? ORDER BY Odometer ASC";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, minMiles);
+            stmt.setInt(2, maxMiles);
+            try (ResultSet rs = stmt.executeQuery()) {
+                System.out.println("\nVehicle Records:");
+                while (rs.next()) {
+                    System.out.println("VIN: " + rs.getInt("VINNumber") +
+                            "\nYear: " + rs.getInt("Year") +
+                            "\nMake: " + rs.getString("Make") +
+                            "\nModel: " + rs.getString("Model") +
+                            "\nVehicle Type: " + rs.getString("VehicleType") +
+                            "\nColor: " + rs.getString("Color") +
+                            "\nMileage: " + rs.getInt("Odometer") +
+                            "\nPrice: $" + rs.getDouble("Price") +
+                            "\nisSold: " + rs.getByte("Sold") + "\n\n"
+                    );
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
     /*while (true) {
         System.out.println("What do you want to search by?\n1) Make\n2) Model");
         input = scan.nextInt();
