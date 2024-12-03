@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -39,12 +40,13 @@ public class UserInterface {
                     "6) Find vehicles by type\n" +
                     "7) List All vehicles\n" +
                     "8) Add a vehicle\n" +
-                    "9) Remove a vehicle\n" +
-                    "99) Quit");
+                    "9) Update a vehicle\n" +
+                    "10) Remove a vehicle\n" +
+                    "0) Quit");
 
             byte input = scan.nextByte();
             switch (input) {
-                case 99:
+                case 0:
                     System.out.println("Goodbye");
                     exitApp = true;
                     displayMenu = false;
@@ -98,13 +100,12 @@ public class UserInterface {
                     //System.out.println("Vehicle Added Successfully");
                     break;
                 case 9:
+                    DataManager.updateVehicleRecord(connect, scan);
+                    break;
+                case 10:
                     System.out.println("What is the VIN of the vehicle do you want to remove");
                     int vin = scan.nextInt();
                     Dealership.writerRemove(Integer.toString(vin));
-                    break;
-                case 10:
-                    //Ask for stuff
-                    //method
                     break;
                 case 11:
                     //Ask for stuff
