@@ -5,26 +5,30 @@ import java.util.Scanner;
 
 
 public class VehicleDAO {
-    private static Scanner scan = new Scanner(System.in);
+    //private static Scanner scan = new Scanner(System.in);
 
     static void viewVehicleByPrice(Connection connection, double min, double max) throws SQLException {
-        String sql = "SELECT * FROM [BVS_Table2:Vehicles] WHERE Price BETWEEN " +
-                min + " AND " + max + "ORDER BY Price ASC";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            System.out.println("\nVehicle Records:");
-            while (rs.next()) {
-                System.out.println("VIN: " + rs.getInt("VINNumber") +
-                        "\nYear: " + rs.getInt("Year") +
-                        "\nMake: " + rs.getString("Make") +
-                        "\nModel: " + rs.getString("Model") +
-                        "\nVehicle Type: " + rs.getString("VehicleType") +
-                        "\nColor: " + rs.getString("Color") +
-                        "\nMileage: " + rs.getInt("Odometer") +
-                        "\nPrice: $" + rs.getDouble("Price") +
-                        "\nisSold: " + rs.getByte("Sold") + "\n\n"
-                );
+        String sql = "SELECT * FROM [BVS_Table2:Vehicles] WHERE Price BETWEEN ? AND ? ORDER BY Price ASC";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setDouble(1, min);
+            stmt.setDouble(2, max);
+            try (ResultSet rs = stmt.executeQuery()) {
+                System.out.println("\nVehicle Records:");
+                while (rs.next()) {
+                    System.out.println("VIN: " + rs.getInt("VINNumber") +
+                            "\nYear: " + rs.getInt("Year") +
+                            "\nMake: " + rs.getString("Make") +
+                            "\nModel: " + rs.getString("Model") +
+                            "\nVehicle Type: " + rs.getString("VehicleType") +
+                            "\nColor: " + rs.getString("Color") +
+                            "\nMileage: " + rs.getInt("Odometer") +
+                            "\nPrice: $" + rs.getDouble("Price") +
+                            "\nisSold: " + rs.getByte("Sold") + "\n\n"
+                    );
+                }
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -48,26 +52,32 @@ public class VehicleDAO {
                     );
                 }
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     static void viewVehicleByYear(Connection connection, int oldYear, int newYear) throws SQLException {
-        String sql = "SELECT * FROM [BVS_Table2:Vehicles] WHERE Year BETWEEN " +
-                oldYear + " AND " + newYear + "ORDER BY Year ASC";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            System.out.println("\nVehicle Records:");
-            while (rs.next()) {
-                System.out.println("VIN: " + rs.getInt("VINNumber") +
-                        "\nYear: " + rs.getInt("Year") +
-                        "\nMake: " + rs.getString("Make") +
-                        "\nModel: " + rs.getString("Model") +
-                        "\nVehicle Type: " + rs.getString("VehicleType") +
-                        "\nColor: " + rs.getString("Color") +
-                        "\nMileage: " + rs.getInt("Odometer") +
-                        "\nPrice: $" + rs.getDouble("Price") +
-                        "\nisSold: " + rs.getByte("Sold") + "\n\n"
-                );
+        String sql = "SELECT * FROM [BVS_Table2:Vehicles] WHERE Year BETWEEN ? AND ? ORDER BY Year ASC";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, oldYear);
+            stmt.setInt(2, newYear);
+            try (ResultSet rs = stmt.executeQuery()) {
+                System.out.println("\nVehicle Records:");
+                while (rs.next()) {
+                    System.out.println("VIN: " + rs.getInt("VINNumber") +
+                            "\nYear: " + rs.getInt("Year") +
+                            "\nMake: " + rs.getString("Make") +
+                            "\nModel: " + rs.getString("Model") +
+                            "\nVehicle Type: " + rs.getString("VehicleType") +
+                            "\nColor: " + rs.getString("Color") +
+                            "\nMileage: " + rs.getInt("Odometer") +
+                            "\nPrice: $" + rs.getDouble("Price") +
+                            "\nisSold: " + rs.getByte("Sold") + "\n\n"
+                    );
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
