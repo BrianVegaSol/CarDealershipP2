@@ -14,7 +14,9 @@ public class VehicleDAO {
             stmt.setDouble(2, max);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("\nVehicle Records:");
+                boolean found = false;
                 while (rs.next()) {
+                    found = true;
                     System.out.println("VIN: " + rs.getInt("VINNumber") +
                             "\nYear: " + rs.getInt("Year") +
                             "\nMake: " + rs.getString("Make") +
@@ -25,6 +27,9 @@ public class VehicleDAO {
                             "\nPrice: $" + rs.getDouble("Price") +
                             "\nisSold: " + rs.getByte("Sold") + "\n\n"
                     );
+                }
+                if (!found) {
+                    System.out.println("No Vehicle of that Price range found");
                 }
             }
         } catch (SQLException e) {
@@ -39,7 +44,9 @@ public class VehicleDAO {
             stmt.setString(2, model);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("\nVehicle Records:");
+                boolean found = false;
                 while (rs.next()) {
+                    found = true;
                     System.out.println("VIN: " + rs.getInt("VINNumber") +
                             "\nYear: " + rs.getInt("Year") +
                             "\nMake: " + rs.getString("Make") +
@@ -51,6 +58,9 @@ public class VehicleDAO {
                             "\nisSold: " + rs.getByte("Sold") + "\n\n"
                     );
                 }
+            if (!found) {
+                System.out.println("No "+ make + " " + model + "s found");
+            }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -64,7 +74,9 @@ public class VehicleDAO {
             stmt.setInt(2, newYear);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("\nVehicle Records:");
+                boolean found = false;
                 while (rs.next()) {
+                    found = true;
                     System.out.println("VIN: " + rs.getInt("VINNumber") +
                             "\nYear: " + rs.getInt("Year") +
                             "\nMake: " + rs.getString("Make") +
@@ -75,6 +87,9 @@ public class VehicleDAO {
                             "\nPrice: $" + rs.getDouble("Price") +
                             "\nisSold: " + rs.getByte("Sold") + "\n\n"
                     );
+                }
+                if (!found) {
+                    System.out.println("No Vehicle in that range found");
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -88,7 +103,9 @@ public class VehicleDAO {
             stmt.setString(1, color);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("\nVehicle Records:");
+                boolean found = false;
                 while (rs.next()) {
+                    found = true;
                     System.out.println("VIN: " + rs.getInt("VINNumber") +
                             "\nYear: " + rs.getInt("Year") +
                             "\nMake: " + rs.getString("Make") +
@@ -99,6 +116,9 @@ public class VehicleDAO {
                             "\nPrice: $" + rs.getDouble("Price") +
                             "\nisSold: " + rs.getByte("Sold") + "\n\n"
                     );
+                }
+                if (!found) {
+                    System.out.println("No " + color + " Vehicles found");
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -113,7 +133,9 @@ public class VehicleDAO {
             stmt.setInt(2, maxMiles);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("\nVehicle Records:");
+                boolean found = false;
                 while (rs.next()) {
+                    found = true;
                     System.out.println("VIN: " + rs.getInt("VINNumber") +
                             "\nYear: " + rs.getInt("Year") +
                             "\nMake: " + rs.getString("Make") +
@@ -124,6 +146,38 @@ public class VehicleDAO {
                             "\nPrice: $" + rs.getDouble("Price") +
                             "\nisSold: " + rs.getByte("Sold") + "\n\n"
                     );
+                }
+                if (!found) {
+                    System.out.println("No Vehicle of that Mileage range found");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    static void viewVehicleByVehicleType (Connection connection, String type) throws SQLException {
+        String sql = "SELECT * FROM [BVS_Table2:Vehicles] WHERE VehicleType = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, type);
+            try (ResultSet rs = stmt.executeQuery()) {
+                System.out.println("\nVehicle Records:");
+                boolean found = false;
+                while (rs.next()) {
+                    found = true;
+                    System.out.println("VIN: " + rs.getInt("VINNumber") +
+                            "\nYear: " + rs.getInt("Year") +
+                            "\nMake: " + rs.getString("Make") +
+                            "\nModel: " + rs.getString("Model") +
+                            "\nVehicle Type: " + rs.getString("VehicleType") +
+                            "\nColor: " + rs.getString("Color") +
+                            "\nMileage: " + rs.getInt("Odometer") +
+                            "\nPrice: $" + rs.getDouble("Price") +
+                            "\nisSold: " + rs.getByte("Sold") + "\n\n"
+                    );
+                }
+                if (!found) {
+                    System.out.println("No Vehicle of Type " + type + " found");
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

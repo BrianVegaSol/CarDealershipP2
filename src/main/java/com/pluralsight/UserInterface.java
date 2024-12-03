@@ -88,7 +88,7 @@ public class UserInterface {
                     scan.nextLine();
                     System.out.println("What is the type of the car?");
                     String type = scan.nextLine();
-                    processGetVehiclesByTypeRequest(type);
+                    VehicleDAO.viewVehicleByVehicleType(connect, type);
                     break;
                 case 7:
                     DataManager.viewVehicleRecords(connect);
